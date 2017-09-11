@@ -133,7 +133,7 @@ function assignment_q1
         ylabel('Height (in m)')
         xlabel('Time (in sec)')
         hold off
-        saveas(save_fig, ['theta_vs_t_part_', part, '.png'])
+        saveas(save_fig, ['height_vs_t_part_', part, '.png'])
     end
      
     %%%Functions%%%
