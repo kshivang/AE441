@@ -12,18 +12,75 @@ function assignment_q1
     massRate = M_p /  t_b; % kg/s
     Thrust = massRate * u_eq;  %N
     R = M_o / M_b;
+
+    x_ = zeros(4, 1001);
+    y_ = zeros(4, 1001);
+    h_ = zeros(4, 1001);
+    u_ = zeros(4, 1001);
+    theta_ = zeros(4, 1001);
+    t_ = zeros(4, 1001);
+
     
     % Question 1 Solution
-    solution('a')
+    solution('a');
     
     % Question 2 Solution
-    solution('b')
+    solution('b');
     
     % Question 3 Solution
-    solution('c')
+    solution('c');
     
     % Question 4 Solution
-    solution('d')
+    solution('d');
+
+    % Plot between x vs y
+    save_fig = figure;
+    hold on
+    title('x vs y')
+    ylabel('x co-ordinate (in m)')
+    xlabel('y co-ordinate (in m)')
+    for k = 1:4
+      plot(x_(k, :), y_(k, :))
+    end
+    legend('Part A', 'Part B', 'Part C', 'Part D', 'Location', 'southeast')
+    hold off
+    saveas(save_fig, 'x_vs_y.png');
+    %%Plot speed vs time%%%
+    save_fig = figure;
+    hold on
+    title('u vs t')
+    ylabel('Velocity (in m/s)')
+    xlabel('Time (in sec)')
+    for k = 1:4
+        plot(t_(k, :), u_(k, :))
+    end
+    legend('Part A', 'Part B', 'Part C', 'Part D', 'Location', 'southeast')
+    hold off
+    saveas(save_fig, 'u_vs_t.png')
+    %Plot elevation angle vs time%%%
+    save_fig = figure;
+    hold on
+    title('theta vs t')
+    ylabel('Elevation angle (in degree)')
+    xlabel('Time (in sec)')
+    for k = 1:4
+        plot(t_(k, :), theta_(k, :))
+    end
+    legend('Part A', 'Part B', 'Part C', 'Part D', 'Location', 'southeast')
+    hold off
+    saveas(save_fig, 'theta_vs_t.png')
+    %Plot height vs time%%
+    save_fig = figure;
+    hold on
+    title('height vs t')
+    ylabel('Height (in m)')
+    xlabel('Time (in sec)')
+    for k = 1:4
+        plot(t_(k, :), h_(k, :))
+    end
+    legend('Part A', 'Part B', 'Part C', 'Part D', 'Location', 'southeast')
+    hold off
+    saveas(save_fig, 'height_vs_t.png')
     
     function solution(part)
         D = 0; % N
@@ -96,46 +153,50 @@ function assignment_q1
         disp(['Burnout speed(v_b) is ', num2str(u(end)), ' m/s']);
         % Burnout theta for respective question
         disp(['Burnout angle(theta) is ', num2str(theta(end)), ' degree']);
+
+        if (part == 'a')
+          x_(1, :) = x;
+          y_(1, :) = y;
+          h_(1, :) = h;
+          u_(1, :) = u;
+          theta_(1, :) = theta;
+          t_(1, :) = t;
+        elseif (part == 'b')
+          x_(2, :) = x;
+          y_(2, :) = y;
+          h_(2, :) = h;
+          u_(2, :) = u;
+          theta_(2, :) = theta;
+          t_(2, :) = t;
+        elseif (part == 'c')
+          x_(3, :) = x;
+          y_(3, :) = y;
+          h_(3, :) = h;
+          u_(3, :) = u;
+          theta_(3, :) = theta;
+          t_(3, :) = t;
+        else
+          x_(4, :) = x;
+          y_(4, :) = y;
+          h_(4, :) = h;
+          u_(4, :) = u;
+          theta_(4, :) = theta;
+          t_(4, :) = t;
+        end
         
         %%%Plots%%%
         %%%Plot y-coordinate vs x-coordinate%%%
-        save_fig = figure
-        hold on
-        plot(x, y)
-        title(['x vs y for part ', part])
-        ylabel('x co-ordinate (in m)')
-        xlabel('y co-ordinate (in m)')
-        hold off
-        saveas(save_fig, ['x_vs_y_part_', part, '.png'])
-        %%%Plot speed vs time%%%
-        save_fig = figure
-        hold on
-        plot(t, u)
-        title(['u vs t for part ', part])
-        ylabel('Velocity (in m/s)')
-        xlabel('Time (in sec)')
-        hold off
-        saveas(save_fig, ['u_vs_t_part_', part, '.png'])
-        %%%Plot elevation angle vs time%%%
-        save_fig = figure
-        hold on
-        plot(t, theta)
-        title(['theta vs t for part ', part])
-        ylabel('Elevation angle (in degree)')
-        xlabel('Time (in sec)')
-        hold off
-        saveas(save_fig, ['theta_vs_t_part_', part, '.png'])
-        %%%Plot height vs time%%
-        save_fig = figure
-        hold on
-        plot(t, h)
-        title(['height vs t for part ', part])
-        ylabel('Height (in m)')
-        xlabel('Time (in sec)')
-        hold off
-        saveas(save_fig, ['height_vs_t_part_', part, '.png'])
+        %save_fig = figure
+        %hold on
+        %plot(x, y)
+        %title(['x vs y for part ', part])
+        %ylabel('x co-ordinate (in m)')
+        %xlabel('y co-ordinate (in m)')
+        %hold off
+        %saveas(save_fig, ['x_vs_y_part_', part, '.png'])
+
     end
-     
+
     %%%Functions%%%
     function g = get_g(g_o, h)
         g = g_o * (6400000 / (6400000 + h));
